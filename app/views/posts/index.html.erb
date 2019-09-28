@@ -1,29 +1,47 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewpost">
+      <!-- In above line data-target id must be same modal popup id -->
+        New Post
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
 
-<h1>Posts</h1>
+  <div class="row" id="container_post">
+    <%= render @posts %>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <%= form_for(@post, method: :post) do |f| %>
+    <div class="modal fade" id="mynewpost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal id must be same with data-target id in buttom -->
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Post</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="field">
+              <%= f.label :title %><br>
+              <%= f.text_area :title, class: "form-control post_title" %>
+            </div>
+            <div class="field">
+              <%= f.label :body %><br>
+              <%= f.text_area :body, class: "form-control post_content" %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="mynewpostclose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= submit_tag "Create", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+</div>
