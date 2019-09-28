@@ -14,7 +14,7 @@
     <%= render @posts %>
   </div>
 
-  <%= form_for(@post, method: :post) do |f| %>
+  <%= form_for(@post, method: :post, remote: true) do |f| %>
     <div class="modal fade" id="mynewpost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <!-- Modal id must be same with data-target id in buttom -->
       <div class="modal-dialog" role="document">
